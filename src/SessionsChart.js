@@ -207,7 +207,7 @@ export default createClassFromSpec('SessionsChart', {
           "update": {
             "x": {"scale": "xscale", "signal": "tooltip.rank", "band": 0.5},
             "y": {"value": 0},
-            "text": {"signal": "tooltip.data"},
+            "text": {"signal": "tooltip.data ? format(tooltip.data,',.2s') : ''"},
             "fillOpacity": [
               {"test": "datum === tooltip", "value": 0},
               {"value": 1}
