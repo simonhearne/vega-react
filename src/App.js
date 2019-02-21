@@ -1,25 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import { createClassFromSpec } from 'react-vega';
+//import { Handler } from 'vega-tooltip';
+
+import BarChart from './BarChart.js';
+import SessionsChart from './SessionsChart.js';
+
 import './App.css';
+
+function handleHover(...args) {
+  console.log(args);
+}
+function handleAnnotationHover(...args) {
+  console.log(`Annotation`);
+  console.log(args);
+}
+
+function generateBarData(size = 10) {
+	let i = 65;
+	let res = [];
+	for (let n = 0; n<size; n++) {
+		res.push({"category":String.fromCharCode(i+n),"amount":Math.round(Math.random()*100)});
+	}
+	return res;
+}
+
+const barData = generateBarData();
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <SessionsChart onSignalAnnotationValue={handleAnnotationHover} id="vega-sessions-chart"/>
       </div>
     );
   }
